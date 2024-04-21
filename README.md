@@ -5,8 +5,10 @@ This project will hopefully grow into a multi-purpose utility for making indie g
 
 The code can very easily be extended into 3D. As we progress, we will consider forking the project into a 3d version. 
 
-DEPENDENCIES
--OpenGL 3.2 (3.3 wont work with my GPU)
--GLFW3.4
--GLEW3.2
--Most recent version of GLM
+DEV DEPENDENCIES
+- OpenGL 3.2 (3.3 wont work with my GPU)
+- MinGW c/cpp compiler
+- cmake
+- GLFW3.4
+- GLEW3.2
+- Most recent version of GLM
