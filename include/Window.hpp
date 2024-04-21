@@ -6,13 +6,19 @@
 
 class Window {
 public:
+
     Window(int width, int height, const char* title);
     ~Window();
 
-    void render();
+    void update();
+    void clear();
     bool isOpen() const;
     void pollEvents();
     void swapBuffers();
+    GLFWwindow* getWindow();
+    void processInput();
+    int getWidth() const;
+    int getHeight() const;
 
     // Add more methods as needed for window management
 

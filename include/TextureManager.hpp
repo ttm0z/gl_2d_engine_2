@@ -12,7 +12,6 @@ public:
     GLuint loadTexture(const std::string& path);
     GLuint getTexture(const std::string& path);
     
-    
     std::unordered_map<std::string, GLuint> textures;
 
 };

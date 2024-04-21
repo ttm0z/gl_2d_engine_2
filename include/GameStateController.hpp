@@ -6,6 +6,7 @@ public:
 
     GameStateController();
     enum class GameState {Menu, Play, Pause, Options};
+    GameState currentState;
     void setState(GameState state);
     GameState getState();
 };

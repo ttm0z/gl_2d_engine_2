@@ -1,5 +1,5 @@
-#include "WorldGenerator.h"
-#include "CellularAutomataMap.h"
+#include "WorldGenerator.hpp"
+#include "CellularAutomataMap.hpp"
 #include <iostream>
 #include <iomanip> // For std::setw
 #include <algorithm> // For std::find

@@ -1,13 +1,27 @@
-#include "Window.h"
+#include "Window.hpp"
 #include <iostream>
 #include <iomanip> // For std::setw
 #include <algorithm> // For std::find
 
 //constructor, initialze
+//create window and initialize glfw context
 Window::Window(int width, int height, const char* title) : width(width), height(height), title(title)
 {
-    window = glfwCreateWindow(width, height, title, NULL, NULL);
-    if( window == NULL ){
+    if( !glfwInit() )
+	{
+		fprintf( stderr, "Failed to initialize GLFW\n" );
+		getchar();
+	}
+
+	glfwWindowHint(GLFW_SAMPLES, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make macOS happy; should not be needed
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	
+	window = glfwCreateWindow(width, height, title, NULL, NULL);
+    
+	if( window == NULL ){
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		getchar();
 		glfwTerminate();
@@ -15,20 +29,41 @@ Window::Window(int width, int height, const char* title) : width(width), height(
 	}
 	glfwMakeContextCurrent(window);
 
-    // Initialize GLEW
-	glewExperimental = true; // Needed for core profile
-	if (glewInit() != GLEW_OK) {
-		fprintf(stderr, "Failed to initialize GLEW\n");
-		getchar();
-		glfwTerminate();
-        //delete window
-	}
+
     // Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
-}
+};
 
 //descructor - cleanup
 Window::~Window(){
-
+	glfwDestroyWindow(window);
+    glfwTerminate();
 }
+
+void Window::update() {
+    processInput();
+}
+
+void Window::clear() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+// check for ESC
+void Window::processInput() {
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, true);
+	}
+}
+
+GLFWwindow* Window::getWindow(){return window;}
+
+bool Window::isOpen() const { return !glfwWindowShouldClose(window); };
+
+void Window::pollEvents(){ glfwPollEvents(); };
+
+void Window::swapBuffers(){ glfwSwapBuffers(window); };
+
+int Window::getWidth() const {return width;}
+
+int Window::getHeight() const {return height;}

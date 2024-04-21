@@ -6,21 +6,25 @@
 #include "PhysicsEngine.hpp"
 #include "GameStateController.hpp"
 #include "Camera.hpp"
+#include "Renderer.hpp"
 
 class Game {
 public:
     Game();
     ~Game();
-    void init();
     void run();
     void update(int deltaTime);
     void render();
 
 private:
-    Window* window;
+    Window window;
     InputManager inputManager;
     TextureManager textureManager;
-    PhysicsEngine physicsEngine
+    PhysicsEngine physicsEngine;
     GameStateController stateController;
     Camera camera;
+    Renderer renderer;
+
+    static const GLfloat vertexBufferData[];
+    GLsizei vertexCount;
 };

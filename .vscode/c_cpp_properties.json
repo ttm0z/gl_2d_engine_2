@@ -4,10 +4,10 @@
             "name": "GCC",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/include",
                 "C:\\glfw-3.4.bin.WIN64\\include",
                 "C:\\glew-2.1.0\\include",
-                "c:/glm",
-                "${workspaceFolder}"
+                "c:/glm"
             ],
             "defines": [
                 "_DEBUG",
