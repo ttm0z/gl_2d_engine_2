@@ -1,0 +1,73 @@
+<mxfile host="Electron" modified="2024-04-21T17:38:26.008Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="pm0xH5WkBWZzF8ngoEj6" version="24.2.5" type="device">
+  <diagram name="Page-1" id="vAa5EEDdHTf7dotlQGDl">
+    <mxGraphModel dx="1693" dy="880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="2" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-1" value="Game" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="40" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-3" value="- Window* window;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- InputManager* inputManager;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- TextureManager* textureManager;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- PhysicsEngine* physicsEngine;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;-GameStateController* stateController;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="90" y="70" width="210" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-7" value="- Game()&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- ~Game()&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- init() : void&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- run() : void&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- update(int deltaTime) : void&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- render() : void&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="90" y="260" width="210" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="LA2UnXWQVeYzpRUARZQC-7" target="LA2UnXWQVeYzpRUARZQC-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="LA2UnXWQVeYzpRUARZQC-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="555.1428571428571" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="LA2UnXWQVeYzpRUARZQC-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="170" y="460" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="170" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-9" value="Window" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="540" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="LA2UnXWQVeYzpRUARZQC-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-10" value="TextureManager" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="540" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-11" value="InputManager" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="40" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-12" value="PhysicsEngine" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="40" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-13" value="GameStateController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="200" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-14" value="WorldGenerator" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="330" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-15" value="Camera" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="460" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-17" value="&amp;nbsp;- GLFWwindow* window;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;- int width;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&amp;nbsp;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;- int height;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;- const char* title;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="570" width="260" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-18" value="+ Window(int width, int height, const char* title)&lt;div&gt;&lt;br&gt;&lt;div&gt;+ ~Window()&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ isOpen() : bool&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ pollEvents(): void&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ swapBuffers(): void&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="39" y="710" width="261" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-21" value="- std::unordered_map&amp;lt;std::string, GLuint&amp;gt; textures" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="370" y="570" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="LA2UnXWQVeYzpRUARZQC-24" value="+ loadTexture(const std::string&amp;amp; path) : GLuint&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ getTexture(const std::string&amp;amp; path) : GLuint&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="370" y="620" width="280" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
