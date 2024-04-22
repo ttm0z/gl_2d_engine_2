@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <gtc/matrix_transform.hpp> // For glm::ortho
 #include <glm.hpp>
+#include <string>
 #include "Window.hpp"
 
 
@@ -25,9 +26,12 @@ public:
 
     void renderTile(float startX, float startY, int tileValue);
 
+    GLuint loadTexture(const std::string& filename);
+
     static const GLfloat vertexBufferData[];
 
     GLsizei vertexCount;
+    GLsizei vertexTextureCount;
 
     void setShaderProgram(GLuint programID);
 
@@ -44,4 +48,6 @@ private:
     int tileHeight;
 
     glm::mat4 projectionMatrix;
+    glm::mat4 viewMatrix;
+
 };
