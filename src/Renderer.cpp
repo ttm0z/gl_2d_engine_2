@@ -19,12 +19,13 @@ Renderer::Renderer(float sWidth, float sHeight, float tWidth, float tHeight) :
         exit(EXIT_FAILURE);
     }
 
-    vertexCount = sizeof(vertexBufferData) / (3 * sizeof(GLfloat));
+    vertexCount = sizeof(vertexBufferData) / (6 * sizeof(GLfloat));
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     GLuint program = LoadShaders( "../shaders/SimpleVertexShader.vertexshader", "../shaders/SimpleFragmentShader.fragmentshader" );
     setShaderProgram(program);
 
     setPositionsBuffer();
+    projectionMatrix = glm::ortho(0.0f, (float)screenWidth, 0.0f, (float)screenHeight, -1.0f, 1.0f);
 
 }
 
@@ -56,6 +57,9 @@ void Renderer::init(){
 
 void Renderer::setShaderProgram(GLuint programID){
     glUseProgram(programID);
+        // Set the projection matrix uniform in the shader
+    GLuint projectionMatrixID = glGetUniformLocation(programID, "projectionMatrix");
+    glUniformMatrix4fv(projectionMatrixID, 1, GL_FALSE, &projectionMatrix[0][0]);
 }
 
 GLuint Renderer::getShaderProgram(){
@@ -67,14 +71,6 @@ void Renderer::renderTilemap(float cameraX, float cameraY, std::vector<std::vect
     int startTileY = (int)(cameraY / tileHeight);
     int endTileX = startTileX + (screenWidth / tileWidth) + 1;
     int endTileY = startTileY + (screenHeight / tileHeight) + 1;
-    for (int i = 0; i < worldMap.size(); ++i) {
-       for (int j = 0; j < worldMap[0].size(); ++j) {
-            std::cout << worldMap[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-
-
 
     // render the visible tiles within camera boundaries
     for(int y = 0; y < screenHeight / 5; y++) {
@@ -93,7 +89,7 @@ void Renderer::renderTilemap(float cameraX, float cameraY, std::vector<std::vect
     }
 }
 
-void Renderer::renderTile(int startX, int startY, int tileValue) {
+void Renderer::renderTile(float startX, float startY, int tileValue) {
     
     // set the color - temporary
     glm::vec3 color;
@@ -122,18 +118,18 @@ void Renderer::renderTile(int startX, int startY, int tileValue) {
 
     // Set attribute pointers for both position and color
     // Position attribute (location = 0)
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     // Color attribute (location = 1)
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
     // Render tile
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
     // Unbind VAO and VBO
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 1);
+    glBindVertexArray(1);
 }
 
 

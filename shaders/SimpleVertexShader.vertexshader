@@ -2,10 +2,10 @@
 
 layout(location = 0) in vec3 position; // Input position attribute
 layout(location = 1) in vec3 color;    // Input color attribute
-
+uniform mat4 projectionMatrix;
 out vec3 fragColor; // Output color to fragment shader
 
 void main() {
-    gl_Position = vec4(position, 1.0); // Set vertex position
+    gl_Position = projectionMatrix * vec4(position, 1.0); // Set vertex position
     fragColor = color;                 // Pass color to fragment shader
 }

@@ -2,6 +2,7 @@
 #pragma once
 
 #include <GL/glew.h>
+#include <gtc/matrix_transform.hpp> // For glm::ortho
 #include <glm.hpp>
 #include "Window.hpp"
 
@@ -22,7 +23,7 @@ public:
 
     void renderTilemap(float cameraX, float cameraY, std::vector<std::vector<int>> worldMap);
 
-    void renderTile(int startX, int startY, int tileValue);
+    void renderTile(float startX, float startY, int tileValue);
 
     static const GLfloat vertexBufferData[];
 
@@ -41,4 +42,6 @@ private:
     int screenHeight;
     int tileWidth;
     int tileHeight;
+
+    glm::mat4 projectionMatrix;
 };
