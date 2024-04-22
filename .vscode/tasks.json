@@ -9,6 +9,7 @@
                 "-g",
                 "${file}",
                 "../util/shader.cpp",
+                "../util/LoadShaderGeo.cpp",
                 "Camera.cpp",
                 "Game.cpp",
                 "CellularAutomataMap.cpp",
@@ -40,7 +41,14 @@
                 "-lglew32",
                 "-lglfw3",
                 "-lgdi32",
-                "-lopengl32"
+                "-lopengl32",
+                // Copy assets folder to build directory
+                "&&",
+                "xcopy",
+                "${workspaceFolder}\\assets",
+                "${workspaceFolder}\\build\\assets\\",
+                "/s",
+                "/e"
             ],
             "options": {
                 "cwd": "${fileDirname}"
