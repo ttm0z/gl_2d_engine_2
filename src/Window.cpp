@@ -43,6 +43,8 @@ Window::~Window(){
 
 void Window::update() {
     processInput();
+	pollEvents();
+	swapBuffers();
 }
 
 void Window::clear() {
