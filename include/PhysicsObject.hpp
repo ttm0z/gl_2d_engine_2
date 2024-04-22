@@ -13,6 +13,7 @@ public:
 
     glm::vec2 getPosition() const {return position;}
     glm::vec2 getVelocity() const {return velocity;}
+    
     float getMass() const {return mass;}
     float getRestitution() const {return restitution;}
 
@@ -25,6 +26,9 @@ public:
         position += velocity * deltaTime;
     }
 
+    void update(){
+        
+    }
 
 private:
     glm::vec2 position;

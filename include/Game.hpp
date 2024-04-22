@@ -16,6 +16,11 @@ public:
     void update(int deltaTime);
     void render();
 
+    int tileWidth;
+    int tileHeight;
+    int screenWidth;
+    int screenHeight;
+
 private:
     Window window;
     InputManager inputManager;

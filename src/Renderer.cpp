@@ -9,7 +9,10 @@ const GLfloat Renderer::vertexBufferData[] = {
 };
 
 
-Renderer::Renderer() : vao_ID(0), vbo_ID(0) {
+Renderer::Renderer(int sWidth, int sHeight, int tWidth, int tHeight) : 
+    vao_ID(0), vbo_ID(0), screenWidth(sWidth), 
+    screenHeight(sHeight), tileWidth(tWidth), tileHeight(tHeight)
+    {
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK) {
         std::cerr << "Failed to initialize GLEW" << std::endl;
@@ -53,6 +56,31 @@ void Renderer::init(){
 
 void Renderer::setShaderProgram(GLuint programID){
     glUseProgram(programID);
+}
+
+GLuint Renderer::getShaderProgram(){
+    return programID;
+}
+
+void Renderer::renderTilemap(float cameraX, float cameraY){
+    int startTileX = (int)(cameraX / tileWidth);
+    int startTileY = (int)(cameraY / tileHeight);
+    int endTileX = startTileX + (screenWidth / tileWidth);
+    int endTileY = startTileY + (screenHeight / tileHeight);
+
+    // render the visible tiles within camera boundaries
+    for(int y = startTileY; y <= endTileY; y++) {
+        for(int x = startTileX; x <= endTileX; x++) {
+            float tilePosX = x * tileWidth - cameraX;
+            float tilePosY = y * tileHeight - cameraY;
+            //render tile at ()
+            renderTile(tilePosX, tilePosY);
+        }
+    }
+}
+
+void Renderer::renderTile(int startX, int startY){
+
 }
 
 void Renderer::render() {

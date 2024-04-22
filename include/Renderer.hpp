@@ -6,7 +6,7 @@
 
 class Renderer {
 public:
-    Renderer();
+    Renderer(int sWidth, int sHeight, int tWidth, int tHeight);
     ~Renderer();
     
     void init();
@@ -16,6 +16,10 @@ public:
     GLuint getShaderProgram();
 
     void setPositionsBuffer();
+
+    void renderTilemap(float cameraX, float cameraY);
+
+    void renderTile(int startX, int startY);
 
     static const GLfloat vertexBufferData[];
 
@@ -27,4 +31,8 @@ private:
     GLuint programID;
     GLuint vao_ID;
     GLuint vbo_ID;
+    int screenWidth;
+    int screenHeight;
+    int tileWidth;
+    int tileHeight;
 };

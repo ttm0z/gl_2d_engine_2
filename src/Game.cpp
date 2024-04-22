@@ -2,8 +2,12 @@
 
 Game::Game()
     : window(1200, 600, "Game"), inputManager(window.getWindow()), textureManager(),
-    stateController(), renderer(), physicsEngine(), camera(1200, 600)
+    stateController(), renderer(), physicsEngine(), camera(800, 800, 200, 200)
 {
+    tileWidth = 32;
+    tileHeight = 32;
+    screenWidth = 800;
+    screenHeight = 800;
     renderer.init();
 }
 
