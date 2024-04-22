@@ -11,9 +11,15 @@ public:
     
     void init();
     
-    void render(const GLfloat* vertexData, GLsizei vertexCount);
+    void render();
 
     GLuint getShaderProgram();
+
+    void setPositionsBuffer();
+
+    static const GLfloat vertexBufferData[];
+
+    GLsizei vertexCount;
 
     void setShaderProgram(GLuint programID);
 

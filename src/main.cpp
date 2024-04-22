@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "Game.hpp"
 
+
 int main(){
     Game game;
     game.run();

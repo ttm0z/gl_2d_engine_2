@@ -1,6 +1,8 @@
 #include "InputManager.hpp"
+#include <iostream>
 
 InputManager::InputManager(GLFWwindow* window){
+    std::cout << "Input Manager Initialized" << std::endl;
     init(window);
 }
 
@@ -12,4 +14,4 @@ bool isKeyPressed(int key){return false;}
 
 std::pair<int, int> getMousePosition(){
     return {0, 0};
-}
+} 

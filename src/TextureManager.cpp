@@ -1,8 +1,12 @@
 #include "TextureManager.hpp"
+#include <iostream>
+
 
 TextureManager::TextureManager() {
     // Initialize the map with an empty unordered_map
     textures = std::unordered_map<std::string, GLuint>();
+    std::cout << "Input Manager Initialized" << std::endl;
+
 }
 
 GLuint TextureManager::loadTexture(const std::string& path) {
