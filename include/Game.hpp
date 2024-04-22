@@ -6,6 +6,7 @@
 #include "PhysicsEngine.hpp"
 #include "GameStateController.hpp"
 #include "Camera.hpp"
+#include "WorldGenerator.hpp"
 #include "Renderer.hpp"
 
 class Game {
@@ -29,6 +30,8 @@ private:
     GameStateController stateController;
     Camera camera;
     Renderer renderer;
+    WorldGenerator generator;
+    std::vector<std::vector<int>> worldMap;
 
     static const GLfloat vertexBufferData[];
     GLsizei vertexCount;

@@ -18,6 +18,7 @@
                 "Tilemap.cpp",
                 "Renderer.cpp",
                 "PhysicsEngine.cpp",
+                "WorldGenerator.cpp",
                 "Tileset.cpp",
                 "Window.cpp",
                 "-o",

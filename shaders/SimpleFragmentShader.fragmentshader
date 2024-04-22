@@ -1,12 +1,9 @@
 #version 330 core
 
-// Ouput data
-out vec3 color;
+in vec3 fragColor; // Input color from vertex shader
 
-void main()
-{
+out vec4 finalColor; // Output color
 
-	// Output color = red 
-	color = vec3(1,0,0);
-
+void main() {
+    finalColor = vec4(fragColor, 1.0); // Set final color
 }

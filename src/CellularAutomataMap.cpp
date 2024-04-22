@@ -2,10 +2,10 @@
 #include <iostream>
 
 CellularAutomata::CellularAutomata(int width, int height) : width(width), height(height), rng(std::random_device{}()) {
-    map.resize(width, std::vector<bool>(height, false));
-}
+    map.resize(width, std::vector<int>(height, 0));
+    }
 
-std::vector<std::vector<bool>> CellularAutomata::generateMap(int iterations, float chanceToStartAlive) {
+std::vector<std::vector<int>> CellularAutomata::generateMap(int iterations, float chanceToStartAlive) {
     std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
 
     // Initialize the map with random cells alive
@@ -19,7 +19,7 @@ std::vector<std::vector<bool>> CellularAutomata::generateMap(int iterations, flo
 
     // Apply cellular automata rules for specified number of iterations
     for (int i = 0; i < iterations; ++i) {
-        std::vector<std::vector<bool>> newMap(width, std::vector<bool>(height, false));
+        std::vector<std::vector<int>> newMap(width, std::vector<int>(height, 0));
 
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {

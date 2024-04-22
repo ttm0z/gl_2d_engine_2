@@ -33,6 +33,8 @@ Window::Window(int width, int height, const char* title) : width(width), height(
     // Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
+	glViewport(0, 0, width, height);
+
 };
 
 //descructor - cleanup

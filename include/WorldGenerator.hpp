@@ -13,7 +13,7 @@ class WorldGenerator {
 private:
     double worldSize;
     int grid_size;
-    std::vector<std::vector<bool>> worldMap;
+    std::vector<std::vector<int>> worldMap;
 
 public:
     WorldGenerator();
@@ -21,7 +21,8 @@ public:
     int manhattanDistance(const Cell& p1, const Cell& p2);
     double generateWorldSize(double mean, double std_dev, double min_val, double max_val);
     int getGridSize();
-    std::vector<std::vector<bool>> getMap();
+    std::vector<std::vector<int>> getMap();
+    void printMap();
 };
 
 #endif

@@ -9,8 +9,8 @@ const GLfloat Renderer::vertexBufferData[] = {
 };
 
 
-Renderer::Renderer(int sWidth, int sHeight, int tWidth, int tHeight) : 
-    vao_ID(0), vbo_ID(0), screenWidth(sWidth), 
+Renderer::Renderer(float sWidth, float sHeight, float tWidth, float tHeight) : 
+    vao_ID(0), vbo_ID(0), tileVAO(0), tileVBO(0), screenWidth(sWidth), 
     screenHeight(sHeight), tileWidth(tWidth), tileHeight(tHeight)
     {
     glewExperimental = GL_TRUE;
@@ -41,14 +41,14 @@ Renderer::~Renderer() {
 
 
 void Renderer::init(){
-    glGenVertexArrays(1, &vao_ID);
-    glBindVertexArray(vao_ID);
+    glGenVertexArrays(1, &tileVAO);
+    glBindVertexArray(tileVAO);
 
-    glGenBuffers(1, &vbo_ID);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_ID);
+    glGenBuffers(1, &tileVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, tileVBO);
 
     // Specify the layout of the vertex data
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)0);
     glEnableVertexAttribArray(0);
 
     
@@ -62,27 +62,82 @@ GLuint Renderer::getShaderProgram(){
     return programID;
 }
 
-void Renderer::renderTilemap(float cameraX, float cameraY){
+void Renderer::renderTilemap(float cameraX, float cameraY, std::vector<std::vector<int>> worldMap){
     int startTileX = (int)(cameraX / tileWidth);
     int startTileY = (int)(cameraY / tileHeight);
-    int endTileX = startTileX + (screenWidth / tileWidth);
-    int endTileY = startTileY + (screenHeight / tileHeight);
+    int endTileX = startTileX + (screenWidth / tileWidth) + 1;
+    int endTileY = startTileY + (screenHeight / tileHeight) + 1;
+    for (int i = 0; i < worldMap.size(); ++i) {
+       for (int j = 0; j < worldMap[0].size(); ++j) {
+            std::cout << worldMap[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+
 
     // render the visible tiles within camera boundaries
-    for(int y = startTileY; y <= endTileY; y++) {
-        for(int x = startTileX; x <= endTileX; x++) {
-            float tilePosX = x * tileWidth - cameraX;
-            float tilePosY = y * tileHeight - cameraY;
+    for(int y = 0; y < screenHeight / 5; y++) {
+        for(int x = 0; x < screenWidth / 5; x++) {
+            float tilePosX = x * tileWidth;
+            float tilePosY = y * tileHeight;
             //render tile at ()
-            renderTile(tilePosX, tilePosY);
+            //std::cout << "world map tile" << ": "<< worldMap[x][y] << std::endl;
+            //std::cout << "tileposx" << ": "<< tilePosX << std::endl;
+            //std::cout << "tileposy" << ": "<<tilePosY << std::endl;
+            //std::cout << "Tile height" << ": "<<tileWidth << std::endl;
+            //std::cout << "Tile width" << ": "<<tileHeight << std::endl;
+
+            renderTile(tilePosX, tilePosY, worldMap[x][y]);
         }
     }
 }
 
-void Renderer::renderTile(int startX, int startY){
+void Renderer::renderTile(int startX, int startY, int tileValue) {
+    
+    // set the color - temporary
+    glm::vec3 color;
+    if (tileValue == 0) {
+        // Blue color
+        color = glm::vec3(0.0f, 0.0f, 1.0f); // Blue
+    } else {
+        // Green color
+        color = glm::vec3(0.0f, 1.0f, 0.0f); // Green
+    }
 
+    
+    float tileData[] = {
+        startX, startY, 0.0f, color.r, color.g, color.b,
+        startX + tileWidth, startY, 0.0f, color.r, color.g, color.b,
+        startX + tileWidth, startY + tileHeight, 0.0f, color.r, color.g, color.b,
+        startX, startY + tileHeight, 0.0f, color.r, color.g, color.b
+    };
+
+    // Bind VAO and VBO
+    glBindVertexArray(tileVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, tileVBO);
+
+    // Load buffer data (both position and color)
+    glBufferData(GL_ARRAY_BUFFER, sizeof(tileData), tileData, GL_STATIC_DRAW);
+
+    // Set attribute pointers for both position and color
+    // Position attribute (location = 0)
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    // Color attribute (location = 1)
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+    // Render tile
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+
+    // Unbind VAO and VBO
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 }
 
+
+// render the red triangle
 void Renderer::render() {
     // Clear the color and depth buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -26,10 +26,6 @@ public:
         position += velocity * deltaTime;
     }
 
-    void update(){
-        
-    }
-
 private:
     glm::vec2 position;
     glm::vec2 velocity;

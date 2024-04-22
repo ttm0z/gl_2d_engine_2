@@ -23,7 +23,7 @@ InputAction InputManager::getDirection(){
     if (glfwGetKey(i_window, GLFW_KEY_UP) == GLFW_PRESS) {
         return InputAction::Up;
     }
-    
+    return InputAction::null;
 }
 
 void InputManager::init(GLFWwindow* window){

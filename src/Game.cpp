@@ -1,20 +1,25 @@
 #include "Game.hpp"
 
 Game::Game()
-    : window(1200, 600, "Game"), inputManager(window.getWindow()), textureManager(),
-    stateController(), renderer(), physicsEngine(), camera(800, 800, 200, 200)
+    : window(800, 800, "Game"), inputManager(window.getWindow()), textureManager(),
+    stateController(), renderer(800.0f, 800.0f, 5.0f, 5.0f), physicsEngine(), camera(800, 800, 0, 0), generator()
 {
-    tileWidth = 32;
-    tileHeight = 32;
+    tileWidth = 5;
+    tileHeight = 5;
     screenWidth = 800;
     screenHeight = 800;
+    
     renderer.init();
+    worldMap = generator.getMap();
+    //generator.printMap();
+
 }
 
 
 
 Game::~Game()
 {
+
 }
 
 void Game::run()
@@ -39,5 +44,5 @@ void Game::update(int deltaTime)
 
 void Game::render()
 {
-    renderer.render();
+    renderer.renderTilemap(0, 0, worldMap);
 }

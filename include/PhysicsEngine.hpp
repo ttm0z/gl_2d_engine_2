@@ -6,9 +6,9 @@ class PhysicsEngine {
 public:
     PhysicsEngine();
 
-    void addPhysicsObject(PhysicsObject* object);
+    void addPhysicsObject(PhysicsObject object);
     void update(int deltaTime);
 
 private:
-    std::vector<PhysicsObject*> objects;
+    std::vector<PhysicsObject> objects;
 };

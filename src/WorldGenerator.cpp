@@ -18,7 +18,7 @@ void WorldGenerator::generateWorld() {
     
     // determine grid size
     grid_size = worldSize * 160;
-    worldMap.resize(grid_size, std::vector<bool>(grid_size, 0));
+    worldMap.resize(grid_size, std::vector<int>(grid_size, 0));
 
     CellularAutomata automata(grid_size, grid_size);
 
@@ -56,6 +56,15 @@ double WorldGenerator::generateWorldSize(double mean, double std_dev, double min
     return result;
 }
 
-std::vector<std::vector<bool>> WorldGenerator::getMap(){
+void WorldGenerator::printMap(){
+    for (int i = 0; i < worldMap.size(); ++i) {
+        for (int j = 0; j < worldMap[0].size(); ++j) {
+            std::cout << worldMap[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+std::vector<std::vector<int>> WorldGenerator::getMap(){
     return worldMap;
 }

@@ -2,11 +2,14 @@
 #pragma once
 
 #include <GL/glew.h>
+#include <glm.hpp>
 #include "Window.hpp"
+
+
 
 class Renderer {
 public:
-    Renderer(int sWidth, int sHeight, int tWidth, int tHeight);
+    Renderer(float sWidth, float sHeight, float tWidth, float tHeight);
     ~Renderer();
     
     void init();
@@ -17,9 +20,9 @@ public:
 
     void setPositionsBuffer();
 
-    void renderTilemap(float cameraX, float cameraY);
+    void renderTilemap(float cameraX, float cameraY, std::vector<std::vector<int>> worldMap);
 
-    void renderTile(int startX, int startY);
+    void renderTile(int startX, int startY, int tileValue);
 
     static const GLfloat vertexBufferData[];
 
@@ -31,6 +34,9 @@ private:
     GLuint programID;
     GLuint vao_ID;
     GLuint vbo_ID;
+    GLuint tileVAO;
+    GLuint tileVBO;
+
     int screenWidth;
     int screenHeight;
     int tileWidth;

@@ -7,7 +7,7 @@ PhysicsEngine::PhysicsEngine(){
     objects = {};
 }
 
-void PhysicsEngine::addPhysicsObject(PhysicsObject* object){
+void PhysicsEngine::addPhysicsObject(PhysicsObject object){
     objects.push_back(object);
 }
 
