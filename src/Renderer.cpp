@@ -6,7 +6,7 @@
 #include "stb_image.h"
 
 
-const GLfloat Renderer::vertexBufferData[] = { 
+const GLfloat vertexBufferData[] = { 
     -1.0f, -1.0f, 0.0f,
     1.0f, -1.0f, 0.0f,
     0.0f,  1.0f, 0.0f,
@@ -38,10 +38,10 @@ Renderer::Renderer(float sWidth, float sHeight, float tWidth, float tHeight) :
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
     //create and set the shader program
-    GLuint program = LoadShaders( "../shaders/SimpleVertexShader.vertexshader", "../shaders/SimpleFragmentShader.fragmentshader" );
+    //GLuint program = LoadShaders( "../shaders/SimpleVertexShader.vertexshader", "../shaders/SimpleFragmentShader.fragmentshader" );
     //setShaderProgram(program);
     
-    GLuint GeometryShaderProgram = LoadShadersWithGeo( "../shaders/GeoVertexShader.glsl", "../shaders/GeometryShader.glsl", "../shaders/GeoFragmentShader.glsl");
+    GLuint GeometryShaderProgram = LoadShadersWithGeo( "../shaders/GeoVertexShader.glsl", "../shaders/GeometryShader1.glsl", "../shaders/GeoFragmentShader.glsl");
     setShaderProgram(GeometryShaderProgram);
 
     setPositionsBuffer();
@@ -63,8 +63,8 @@ Renderer::Renderer(float sWidth, float sHeight, float tWidth, float tHeight) :
 
 
     // bind grass and water textures (tilemap test)
-    GLuint grassTextureID = loadTexture("assets/grass.png");
-    GLuint waterTextureID = loadTexture("assets/water.png");
+    GLuint grassTextureID = loadTexture("../assets/grass.png");
+    GLuint waterTextureID = loadTexture("../assets/water.png");
 }
 
 
@@ -122,11 +122,11 @@ glBindBuffer(GL_ARRAY_BUFFER, tileVBO);
 
 // Define the layout of the vertex data
 // Position attribute (3 floats per vertex, starting from the beginning of the data)
-glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)0);
+glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
 glEnableVertexAttribArray(0);
 
 // Texture coordinate attribute (2 floats per vertex, starting after the position data)
-glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
+glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
 glEnableVertexAttribArray(1);
 
 // Copy vertex data into the buffer
@@ -157,12 +157,6 @@ void Renderer::renderTilemap(float cameraX, float cameraY, std::vector<std::vect
         for(int x = 0; x < screenWidth / 5; x++) {
             float tilePosX = x * tileWidth;
             float tilePosY = y * tileHeight;
-            //render tile at ()
-            //std::cout << "world map tile" << ": "<< worldMap[x][y] << std::endl;
-            //std::cout << "tileposx" << ": "<< tilePosX << std::endl;
-            //std::cout << "tileposy" << ": "<<tilePosY << std::endl;
-            //std::cout << "Tile height" << ": "<<tileWidth << std::endl;
-            //std::cout << "Tile width" << ": "<<tileHeight << std::endl;
 
             renderTile(tilePosX, tilePosY, worldMap[x][y]);
         }
@@ -171,46 +165,38 @@ void Renderer::renderTilemap(float cameraX, float cameraY, std::vector<std::vect
 
 void Renderer::renderTile(float startX, float startY, int tileValue) {
     
-    // set the color - temporary
-    glm::vec3 color;
+    GLuint textureID;
     if (tileValue == 0) {
-        // Blue color
-        color = glm::vec3(0.0f, 0.0f, 1.0f); // Blue
+        textureID = loadTexture("../assets/grass.png");
     } else {
-        // Green color
-        color = glm::vec3(0.0f, 1.0f, 0.0f); // Green
+        textureID = loadTexture("../assets/water.png");
     }
 
+    // Bind the texture
+    glBindTexture(GL_TEXTURE_2D, textureID);
     
-    float tileData[] = {
-        startX, startY, 0.0f, color.r, color.g, color.b,
-        startX + tileWidth, startY, 0.0f, color.r, color.g, color.b,
-        startX + tileWidth, startY + tileHeight, 0.0f, color.r, color.g, color.b,
-        startX, startY + tileHeight, 0.0f, color.r, color.g, color.b
-    };
-
     // Bind VAO and VBO
     glBindVertexArray(tileVAO);
     glBindBuffer(GL_ARRAY_BUFFER, tileVBO);
 
-    // Load buffer data (both position and color)
-    glBufferData(GL_ARRAY_BUFFER, sizeof(tileData), tileData, GL_STATIC_DRAW);
+    // Load buffer data (both position and texture coordinates)
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexTextureBufferData), vertexTextureBufferData, GL_STATIC_DRAW);
 
-    // Set attribute pointers for both position and color
+    // Set attribute pointers for both position and texture coordinates
     // Position attribute (location = 0)
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    
-    // Color attribute (location = 1)
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(3 * sizeof(float)));
+
+    // Texture coordinate attribute (location = 1)
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
     // Render tile
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
     // Unbind VAO and VBO
-    glBindBuffer(GL_ARRAY_BUFFER, 1);
-    glBindVertexArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 }
 
 

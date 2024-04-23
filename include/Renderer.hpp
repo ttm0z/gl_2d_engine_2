@@ -28,7 +28,6 @@ public:
 
     GLuint loadTexture(const std::string& filename);
 
-    static const GLfloat vertexBufferData[];
 
     GLsizei vertexCount;
     GLsizei vertexTextureCount;

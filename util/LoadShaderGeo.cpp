@@ -29,7 +29,7 @@ GLuint LoadShadersWithGeo(const char * vertex_file_path, const char * geometry_f
         VertexShaderCode = sstr.str();
         VertexShaderStream.close();
     } else {
-        printf("Impossible to open %s. Are you in the right directory ?\n", vertex_file_path);
+        printf("GeometryShader: Impossible to open %s. Are you in the right directory ?\n", vertex_file_path);
         return 0;
     }
 
