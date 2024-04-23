@@ -42,13 +42,7 @@
                 "-lglfw3",
                 "-lgdi32",
                 "-lopengl32",
-                // Copy assets folder to build directory
-                "&&",
-                "xcopy",
-                "${workspaceFolder}\\assets",
-                "${workspaceFolder}\\build\\assets\\",
-                "/s",
-                "/e"
+
             ],
             "options": {
                 "cwd": "${fileDirname}"
